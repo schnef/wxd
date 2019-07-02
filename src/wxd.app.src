@@ -1,0 +1,18 @@
+%%% -*- mode: erlang -*-
+{application, wxd,
+ [{description, "wxErlang demos"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, { wxd_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    wx
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.

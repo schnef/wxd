@@ -1,0 +1,57 @@
+It would be nice if events can be redirected to the widget having
+focus as described in "Cross-Platform GUI Programming with wxWidgets"
+p510-512:
+"It would be more appropriate to send the command to the focused
+control first. Then, if the focused control implements this command
+(such as wxID_COPY ), it will be processed. If it doesn’t, then the
+command will rise up the window hierarchy until it gets to the custom
+wxID_COPY event handler. The end result will be a more natural way of
+working, with commands applying to the data that the user is currently
+editing."
+This is not suported by wxErlang.
+
+The Paste function called from the edit menu is not functionaing
+consistently on at least Debian GNOME. This probably has to do with
+the clipboard's primary stuff, which is still a mystery to me.
+
+After creating an Icon and adding it to a frame, in the Observer code,
+the Icon is destroyed. Probably this is because the Icon itself is
+copied into the frame and memory has to be released. Review this isuue
+and add it to the code.
+
+
+Lay-out of AUI
+--------------
+
+https://wxpython.org/Phoenix/docs/html/wx.aui.AuiManager.html
+
+Inside AUI, the docking layout is figured out by checking several pane
+parameters. Four of these are important for determining where a pane
+will end up:
+
+Direction: Each docked pane has a direction, Top, Bottom, Left, Right,
+or Center. This is fairly self-explanatory. The pane will be placed in
+the location specified by this variable.
+
+Position: More than one pane can be placed inside of a
+dock. Imagine two panes being docked on the left side of a window. One
+pane can be placed over another. In proportionally managed docks, the
+pane position indicates its sequential position, starting with
+zero. So, in our scenario with two panes docked on the left side, the
+top pane in the dock would have position 0, and the second one would
+occupy position 1.
+
+Row: A row can allow for two docks to be placed next to each
+other. One of the most common places for this to happen is in the
+toolbar. Multiple toolbar rows are allowed, the first row being row 0,
+and the second row 1. Rows can also be used on vertically docked
+panes.
+
+Layer: A layer is akin to an onion. Layer 0 is the very center of the
+managed pane. Thus, if a pane is in layer 0, it will be closest to the
+center window (also sometimes known as the “content
+window”). Increasing layers “swallow up” all layers of a lower
+value. This can look very similar to multiple rows, but is different
+because all panes in a lower level yield to panes in higher
+levels. The best way to understand layers is by running the AUI
+sample.
