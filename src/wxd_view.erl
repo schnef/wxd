@@ -64,6 +64,7 @@ init([]) ->
     %% should appear on the screen
     Icon = wxd_util:make_icon("erlang-logo32.png"),
     wxFrame:setIcon(Frame, Icon),
+    wxIcon:destroy(Icon), % Not needed anymore
     wxFrame:setMinSize(Frame, {800, 600}),
     wxFrame:center(Frame, [{dir, ?wxBOTH}]),
 
@@ -567,7 +568,7 @@ stc(Parent, Frame) ->
 
     %% Indentation and tab stuff
     wxStyledTextCtrl:setIndent(Stc, 4), % Preferred indentation for Erlang
-    wxStyledTextCtrl:setIndentationGuides(Stc, true), % Show indent guides
+    wxStyledTextCtrl:setIndentationGuides(Stc, ?wxSTC_IV_REAL), % Show indent guides
     wxStyledTextCtrl:setBackSpaceUnIndents(Stc, true), % Backspace unindents rather than delete 1 space
     wxStyledTextCtrl:setTabIndents(Stc, true), % Tab key indents
     wxStyledTextCtrl:setTabWidth(Stc, 4), % Proscribed tab size for wx
@@ -660,6 +661,7 @@ create_task_bar(Frame) ->
     Task_bar_icon = wxTaskBarIcon:new(),
     Icon = wxd_util:make_icon("erlang-logo64.png"),
     wxTaskBarIcon:setIcon(Task_bar_icon, Icon, [{tooltip, "wxErlang demo"}]),
+    wxIcon:destroy(Icon), % Not needed anymore
     CB = fun(_Evt, _Obj) ->
 		wxFrame:raise(Frame)
 	 end,

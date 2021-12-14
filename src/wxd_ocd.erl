@@ -54,7 +54,7 @@ init([Parent, Menu_bar]) ->
     {NB, #state{panes = Panes}}.
 
 %% Initial, coming from nowhere
-handle_event(#wx{event = #wxNotebook{type = command_notebook_page_changed, nOldSel = Old, nSel = New}}, % Overview page
+handle_event(#wx{event = #wxBookCtrl{type = command_notebook_page_changed, nOldSel = Old, nSel = New}}, % Overview page
 	     #state{panes = Panes} = State) ->
     deactivate(Panes, Old),
     activate(Panes, New),

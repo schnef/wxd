@@ -26,7 +26,7 @@ img(Name) when is_atom(Name) ->
 img(File_name) ->
     img_file(File_name).
     
--spec make_icon(Name :: atom() | file:fijename_all()) -> wxIcon:wxIcon().
+-spec make_icon(Name :: atom() | file:filename_all()) -> wxIcon:wxIcon().
 make_icon(Name) ->
     wxIcon:new(img(Name)).
 
